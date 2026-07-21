@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriRx — Food Prescriptions for Health Conditions</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER : Pharmacy signboard ===== -->
+  <header class="signboard">
+    <div class="signboard__inner">
+      <div class="signboard__mark" aria-hidden="true">
+        <svg viewBox="0 0 60 60" width="46" height="46">
+          <circle cx="30" cy="30" r="28" fill="none" stroke="currentColor" stroke-width="3"/>
+          <text x="30" y="40" text-anchor="middle" font-family="Courier Prime, monospace" font-size="28" fill="currentColor">℞</text>
+        </svg>
+      </div>
+      <div>
+        <p class="signboard__eyebrow">College Project · Nutrition Guide</p>
+        <h1 class="signboard__title">Nutri<span>Rx</span></h1>
+        <p class="signboard__tag">Food is the first medicine. Diagnose the plate before the pill.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== SYMPTOM SELECTOR ===== -->
+  <section class="intake" id="intake">
+    <div class="intake__card">
+      <p class="intake__label">Patient complains of —</p>
+      <div class="intake__row">
+        <select id="conditionSelect" class="intake__select">
+          <option value="" disabled selected>Select a health condition…</option>
+        </select>
+        <span class="intake__stampline">sign here to reveal diet plan →</span>
+      </div>
+      <div class="intake__chips" id="conditionChips"></div>
+    </div>
+  </section>
+
+  <!-- ===== PRESCRIPTION SLIP ===== -->
+  <main class="rx-area" id="rxArea">
+    <p class="rx-placeholder" id="rxPlaceholder">Select a condition above to generate its food prescription.</p>
+  </main>
+
+  <!-- ===== DISCLAIMER ===== -->
+  <footer class="disclaimer">
+    <div class="disclaimer__inner">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/>
+      </svg>
+      <p>This site gives general dietary information only, based on common nutrition guidance. It is <strong>not a medical diagnosis</strong> and does not replace advice from a qualified doctor or dietitian. Always consult a healthcare professional before changing your diet, especially if you have an existing condition.</p>
+    </div>
+    <p class="disclaimer__credit">NutriRx — Academic Mini Project · Built with HTML, CSS &amp; JavaScript</p>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>

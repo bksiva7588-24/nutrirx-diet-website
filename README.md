@@ -9,9 +9,9 @@ Select a health condition (like Heart Problem, Diabetes, High BP, Thyroid, etc.)
 - ❌ Foods to avoid
 - 📝 A short dosage/diet note
 
-## Health conditions covered (20 total)
+## Health conditions covered 
 
-Heart Problem, Diabetes, High Blood Pressure, Obesity, Anemia, Digestive Issues, Thyroid, Kidney Disease, Liver Disease, Arthritis, Skin Problems, Hair Fall, Cold & Immunity, Migraine, Insomnia, PCOS, Asthma, Uric Acid/Gout, Bone Weakness, Stress & Mental Wellness.
+Heart Problem, Diabetes, High Blood Pressure, Obesity, Anemia, Digestive Issues, Thyroid, Kidney Disease, Liver Disease, Arthritis, Skin Problems, Hair Fall, Cold & Immunity, Migraine, Insomnia, PCOS, Asthma, Uric Acid/Gout, Bone Weakness, Stress & Mental Wellness etc...
 
 ## Tech used
 

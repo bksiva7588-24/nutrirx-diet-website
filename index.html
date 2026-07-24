@@ -18,17 +18,30 @@
         </svg>
       </div>
       <div>
-        <p class="signboard__eyebrow">College Project · Nutrition Guide</p>
-        <h1 class="signboard__title">Nutri<span>Rx</span></h1>
+        <p class="signboard__eyebrow">Nutrition Guide</p>
+        <h1 class="signboard__title">Nutri<span>x</span></h1>
         <p class="signboard__tag">Food is the first medicine. Diagnose the plate before the pill.</p>
       </div>
     </div>
   </header>
 
-  <!-- ===== SYMPTOM SELECTOR ===== -->
-  <section class="intake" id="intake">
+  <!-- ===== PAGE 1: HOME - symptom selector ===== -->
+  <section class="intake" id="pageHome">
     <div class="intake__card">
-      <p class="intake__label">Patient complains of —</p>
+      <p class="intake__label">Type your problem —</p>
+      <div class="intake__row">
+        <input
+          type="text"
+          id="symptomSearch"
+          class="intake__search"
+          placeholder="e.g. fever, diabetes, hair fall…"
+          autocomplete="off"
+        />
+        <button type="button" id="searchBtn" class="intake__searchBtn">Get Solution</button>
+      </div>
+      <p class="intake__hint" id="searchHint"></p>
+
+      <p class="intake__label" style="margin-top:1.2rem;">…or select from the list —</p>
       <div class="intake__row">
         <select id="conditionSelect" class="intake__select">
           <option value="" disabled selected>Select a health condition…</option>
@@ -36,15 +49,19 @@
         <span class="intake__stampline">sign here to reveal diet plan →</span>
       </div>
       <div class="intake__chips" id="conditionChips"></div>
+      <button type="button" id="showMoreBtn" class="chip chip--more"></button>
     </div>
   </section>
 
-  <!-- ===== PRESCRIPTION SLIP ===== -->
-  <main class="rx-area" id="rxArea">
-    <p class="rx-placeholder" id="rxPlaceholder">Select a condition above to generate its food prescription.</p>
-  </main>
+  <!-- ===== PAGE 2: SOLUTION - prescription slip ===== -->
+  <section class="page-solution hidden" id="pageSolution">
+    <div class="rx-area__wrap">
+      <button type="button" id="backHomeBtn" class="back-btn">← Back to Home</button>
+      <main class="rx-area" id="rxArea"></main>
+    </div>
+  </section>
 
-  <!-- ===== DISCLAIMER ===== -->
+  <!-- ===== ABOUT / DISCLAIMER STRIP ===== -->
   <footer class="disclaimer">
     <div class="disclaimer__inner">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

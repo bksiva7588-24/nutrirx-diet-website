@@ -291,13 +291,32 @@ body{
 .rx-col--eat .rx-col__label{ color:var(--green-dark); }
 .rx-col--avoid .rx-col__label{ color:var(--rose); }
 
-.food-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.55rem; }
+.food-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.4rem; }
 .food-item{
+  cursor:pointer;
+  border-radius:6px;
+  padding:.3rem .4rem;
+  transition:background .15s ease;
+}
+.food-item:hover{ background:rgba(47,111,78,0.06); }
+.rx-col--avoid .food-item:hover{ background:rgba(168,67,61,0.06); }
+.food-item:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+.food-item__row{
   display:flex;
   align-items:center;
   gap:.6rem;
   font-size:.94rem;
 }
+.food-item__name{ flex:1; }
+.food-item__caret{
+  flex-shrink:0;
+  font-size:.75rem;
+  color:var(--ink-soft);
+  transition:transform .2s ease;
+}
+.food-item.open .food-item__caret{ transform:rotate(180deg); }
+
 .food-item__emoji{ font-size:1.15rem; flex-shrink:0; }
 .food-item__mark{
   flex-shrink:0;
@@ -310,6 +329,23 @@ body{
 }
 .rx-col--eat .food-item__mark{ background:var(--green); }
 .rx-col--avoid .food-item__mark{ background:var(--rose); }
+
+.food-item__desc{
+  max-height:0;
+  overflow:hidden;
+  margin:0;
+  padding:0 0 0 2.4rem;
+  font-size:.82rem;
+  line-height:1.4;
+  color:var(--ink-soft);
+  opacity:0;
+  transition:max-height .25s ease, opacity .2s ease, padding-top .25s ease;
+}
+.food-item.open .food-item__desc{
+  max-height:100px;
+  opacity:1;
+  padding-top:.4rem;
+}
 
 .rx-slip__foot{
   display:flex;
@@ -333,3 +369,21 @@ body{
   margin:0 auto;
   display:flex;
   gap:.8rem;
+  align-items:flex-start;
+  color:var(--ink-soft);
+}
+.disclaimer__inner svg{ flex-shrink:0; margin-top:.15rem; color:var(--rose); }
+.disclaimer__inner p{ margin:0; font-size:.86rem; line-height:1.5; }
+.disclaimer__credit{
+  max-width:900px;
+  margin:1rem auto 0;
+  font-family:'Courier Prime', monospace;
+  font-size:.75rem;
+  color:var(--ink-soft);
+  opacity:.7;
+}
+
+select:focus-visible, .chip:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:2px;
+}

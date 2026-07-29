@@ -3,75 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NutriRx — Food Prescriptions for Health Conditions</title>
-<link rel="stylesheet" href="style.css">
+<title>Nutrix — Food Prescriptions for Health Conditions</title>
+<link rel="stylesheet" href="d1.css">
 </head>
 <body>
 
-  <!-- ===== HEADER : Pharmacy signboard ===== -->
-  <header class="signboard">
-    <div class="signboard__inner">
-      <div class="signboard__mark" aria-hidden="true">
-        <svg viewBox="0 0 60 60" width="46" height="46">
-          <circle cx="30" cy="30" r="28" fill="none" stroke="currentColor" stroke-width="3"/>
-          <text x="30" y="40" text-anchor="middle" font-family="Courier Prime, monospace" font-size="28" fill="currentColor">℞</text>
+  <!-- ===== AUTH / LOGIN MODAL FLOW ===== -->
+  <div class="auth-overlay" id="authModal">
+    <div class="auth-card">
+      <div class="auth-card__header">
+        <div class="auth-card__logo">℞</div>
+        <h2>Welcome to Nutrix</h2>
+        <p>Your personalized food prescription guide</p>
+      </div>
+
+      <!-- Step 1: Name Input -->
+      <form id="authStep1" class="auth-form">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" required placeholder="e.g. John" />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" required placeholder="e.g. Doe" />
+        </div>
+        <button type="submit" class="auth-btn">Next Step →</button>
+      </form>
+
+      <!-- Step 2: Contact Details Input -->
+      <form id="authStep2" class="auth-form hidden">
+        <div class="form-group">
+          <label for="emailInput">Email Address</label>
+          <input type="email" id="emailInput" required placeholder="john.doe@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="phoneInput">Phone Number</label>
+          <input type="tel" id="phoneInput" required placeholder="+1 234 567 8900" />
+        </div>
+        <div class="auth-form__row">
+          <button type="button" id="backToStep1" class="auth-btn auth-btn--secondary">← Back</button>
+          <button type="submit" class="auth-btn">Log In</button>
+        </div>
+      </form>
+
+      <!-- Step 3: Success Screen -->
+      <div id="authSuccess" class="auth-success hidden">
+        <div class="auth-success__icon">✓</div>
+        <h3>Login Successful!</h3>
+        <p id="welcomeUserMsg">Welcome back, User!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN APPLICATION CONTENT ===== -->
+  <div id="appContent" class="app-content hidden">
+
+    <!-- ===== HEADER : Pharmacy signboard ===== -->
+    <header class="signboard">
+      <div class="signboard__inner">
+        <div class="signboard__mark" aria-hidden="true">
+          <svg viewBox="0 0 60 60" width="46" height="46">
+            <circle cx="30" cy="30" r="28" fill="none" stroke="currentColor" stroke-width="3"/>
+            <text x="30" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="28" fill="currentColor">℞</text>
+          </svg>
+        </div>
+        <div>
+          <p class="signboard__eyebrow">Nutrition Guide</p>
+          <h1 class="signboard__title">Nutri<span>x</span></h1>
+          <p class="signboard__tag" id="tagText">Food is the first medicine. Diagnose the plate before the pill.</p>
+          <div class="signboard__stats">
+            <span class="stat-pill">35 Conditions</span>
+            <span class="stat-pill">330+ Foods</span>
+            <span class="stat-pill">🔍 Search or Browse</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE 1: HOME - symptom selector ===== -->
+    <section class="intake" id="pageHome">
+      <div class="intake__card">
+        <p class="intake__label">Type your problem —</p>
+        <div class="intake__row">
+          <input
+            type="text"
+            id="symptomSearch"
+            class="intake__search"
+            placeholder="e.g. fever, diabetes, hair fall…"
+            autocomplete="off"
+          />
+          <button type="button" id="searchBtn" class="intake__searchBtn">Get Solution</button>
+        </div>
+        <p class="intake__hint" id="searchHint"></p>
+
+        <p class="intake__label" style="margin-top:1.2rem;">…or select from the list —</p>
+        <div class="intake__row">
+          <select id="conditionSelect" class="intake__select">
+            <option value="" disabled selected>Select a health condition…</option>
+          </select>
+          <span class="intake__stampline">sign here to reveal diet plan →</span>
+        </div>
+        <div class="intake__chips" id="conditionChips"></div>
+        <button type="button" id="showMoreBtn" class="chip chip--more"></button>
+      </div>
+
+      <div class="feature-strip">
+        <!-- Clickable card to redirect to the Symptom Search Page -->
+        <div class="feature-card feature-card--clickable" id="searchBySymptomCard">
+          <span class="feature-card__icon">🔎</span>
+          <p class="feature-card__title">Search by Symptom <span class="feature-card__badge">Open Page →</span></p>
+          <p class="feature-card__text">Type what you're feeling and get instant matches for all diseases.</p>
+        </div>
+        
+        <!-- Clickable card to redirect to the Food Insights Page -->
+        <div class="feature-card feature-card--clickable" id="tapToLearnWhyCard">
+          <span class="feature-card__icon">👆</span>
+          <p class="feature-card__title">Tap to Learn Why <span class="feature-card__badge">Open Page →</span></p>
+          <p class="feature-card__text">Every food item explains why it helps or hurts your health.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PAGE 2: SOLUTION - prescription slip ===== -->
+    <section class="page-subpage hidden" id="pageSolution">
+      <div class="subpage__wrap">
+        <div class="page-nav-row">
+          <button type="button" id="backHomeFromRx" class="back-btn">← Back to Home</button>
+        </div>
+        <main class="rx-area" id="rxArea"></main>
+      </div>
+    </section>
+
+    <!-- ===== PAGE 3: SYMPTOM SEARCH DEDICATED PAGE ===== -->
+    <section class="page-subpage hidden" id="pageSearch">
+      <div class="subpage__wrap">
+        <div class="page-nav-row">
+          <button type="button" id="backHomeFromSearch" class="back-btn">← Back to Home</button>
+        </div>
+        <div class="directory-header">
+          <h3>🔎 Search Disease by Symptoms</h3>
+          <p>Type what you are experiencing to filter conditions by early symptoms, causes, or health names.</p>
+        </div>
+
+        <div class="search-page__box">
+          <input
+            type="text"
+            id="pageSearchInput"
+            class="intake__search"
+            placeholder="Type symptoms (e.g., fatigue, headache, itching, fever, stomach pain)..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="search-page__stats" id="searchResultsCount">Showing all 35 health conditions</div>
+        <div class="directory-grid" id="searchResultGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== PAGE 4: FOOD INSIGHTS ("Tap to Learn Why") ===== -->
+    <section class="page-subpage hidden" id="pageFoodWhy">
+      <div class="subpage__wrap">
+        <div class="page-nav-row">
+          <button type="button" id="backHomeFromFoodWhy" class="back-btn">← Back to Home</button>
+        </div>
+        <div class="directory-header">
+          <h3>👆 Why Foods Help or Hurt Your Body</h3>
+          <p>Detailed nutritional impact breakdowns for common foods and drinks.</p>
+        </div>
+        <div class="food-why-grid" id="foodWhyGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT / DISCLAIMER STRIP ===== -->
+    <footer class="disclaimer">
+      <div class="disclaimer__inner">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/>
         </svg>
+        <p>This site gives general dietary information only, based on common nutrition guidance. It is <strong>not a medical diagnosis</strong> and does not replace advice from a qualified doctor or dietitian. Always consult a healthcare professional before changing your diet, especially if you have an existing condition.</p>
       </div>
-      <div>
-        <p class="signboard__eyebrow">Nutrition Guide</p>
-        <h1 class="signboard__title">Nutri<span>x</span></h1>
-        <p class="signboard__tag">Food is the first medicine. Diagnose the plate before the pill.</p>
-      </div>
-    </div>
-  </header>
+      <p class="disclaimer__credit">Nutrix — Academic Mini Project · Built with HTML, CSS &amp; JavaScript</p>
+    </footer>
 
-  <!-- ===== PAGE 1: HOME - symptom selector ===== -->
-  <section class="intake" id="pageHome">
-    <div class="intake__card">
-      <p class="intake__label">Type your problem —</p>
-      <div class="intake__row">
-        <input
-          type="text"
-          id="symptomSearch"
-          class="intake__search"
-          placeholder="e.g. fever, diabetes, hair fall…"
-          autocomplete="off"
-        />
-        <button type="button" id="searchBtn" class="intake__searchBtn">Get Solution</button>
-      </div>
-      <p class="intake__hint" id="searchHint"></p>
+  </div>
 
-      <p class="intake__label" style="margin-top:1.2rem;">…or select from the list —</p>
-      <div class="intake__row">
-        <select id="conditionSelect" class="intake__select">
-          <option value="" disabled selected>Select a health condition…</option>
-        </select>
-        <span class="intake__stampline">sign here to reveal diet plan →</span>
-      </div>
-      <div class="intake__chips" id="conditionChips"></div>
-      <button type="button" id="showMoreBtn" class="chip chip--more"></button>
-    </div>
-  </section>
-
-  <!-- ===== PAGE 2: SOLUTION - prescription slip ===== -->
-  <section class="page-solution hidden" id="pageSolution">
-    <div class="rx-area__wrap">
-      <button type="button" id="backHomeBtn" class="back-btn">← Back to Home</button>
-      <main class="rx-area" id="rxArea"></main>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT / DISCLAIMER STRIP ===== -->
-  <footer class="disclaimer">
-    <div class="disclaimer__inner">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/>
-      </svg>
-      <p>This site gives general dietary information only, based on common nutrition guidance. It is <strong>not a medical diagnosis</strong> and does not replace advice from a qualified doctor or dietitian. Always consult a healthcare professional before changing your diet, especially if you have an existing condition.</p>
-    </div>
-    <p class="disclaimer__credit">NutriRx — Academic Mini Project · Built with HTML, CSS &amp; JavaScript</p>
-  </footer>
-
-<script src="script.js"></script>
+<script src="d2.js"></script>
 </body>
 </html>

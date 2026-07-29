@@ -1,11 +1,75 @@
-// ===== DATA: each health condition with its food prescription =====
-// Each food item has: e (emoji), t (title), w (why - short description shown on click)
+// ===== DATA: FOOD INSIGHTS ("TAP TO LEARN WHY") =====
+const FOOD_INSIGHTS = [
+  {
+    emoji: "🥗",
+    name: "Apple",
+    type: "good",
+    points: [
+      { mark: "✓", text: "Rich in fiber and vitamins" },
+      { mark: "✓", text: "Helps digestion and supports immunity" },
+      { mark: "✓", text: "Low in calories and good for heart health" }
+    ]
+  },
+  {
+    emoji: "🍔",
+    name: "Burger",
+    type: "bad",
+    points: [
+      { mark: "⚠", text: "High in saturated fat and calories" },
+      { mark: "⚠", text: "Frequent consumption may lead to weight gain" },
+      { mark: "⚠", text: "Often contains excess salt" }
+    ]
+  },
+  {
+    emoji: "🥕",
+    name: "Carrot",
+    type: "good",
+    points: [
+      { mark: "✓", text: "High in Vitamin A" },
+      { mark: "✓", text: "Supports eye health" },
+      { mark: "✓", text: "Contains antioxidants" }
+    ]
+  },
+  {
+    emoji: "🍟",
+    name: "French Fries",
+    type: "bad",
+    points: [
+      { mark: "⚠", text: "Deep-fried and high in unhealthy fats" },
+      { mark: "⚠", text: "Can increase cholesterol levels if eaten often" },
+      { mark: "⚠", text: "Low nutritional value" }
+    ]
+  },
+  {
+    emoji: "🐟",
+    name: "Fish",
+    type: "good",
+    points: [
+      { mark: "✓", text: "Good source of protein and Omega-3 fatty acids" },
+      { mark: "✓", text: "Supports brain and heart health" },
+      { mark: "✓", text: "Helps muscle growth" }
+    ]
+  },
+  {
+    emoji: "🥤",
+    name: "Soft Drink",
+    type: "bad",
+    points: [
+      { mark: "⚠", text: "Contains high amounts of sugar" },
+      { mark: "⚠", text: "May increase risk of obesity and tooth decay" },
+      { mark: "⚠", text: "Provides little nutritional benefit" }
+    ]
+  }
+];
+
+// ===== DATA: HEALTH CONDITIONS =====
 const CONDITIONS = [
   {
     id: "heart",
     name: "Heart Problem",
     icon: "❤️",
     sub: "Coronary / cholesterol / blood pressure related heart issues",
+    starts: "Begins with silent fat buildup in blood vessels, mild tightness in chest during physical exertion, early fatigue, and gradual increase in blood pressure.",
     dosage: "Take oats or nuts every morning · limit salt to 1 tsp/day",
     stamp: "LOW\nSALT",
     eat: [
@@ -29,6 +93,7 @@ const CONDITIONS = [
     name: "Diabetes",
     icon: "🩸",
     sub: "High blood sugar / insulin resistance",
+    starts: "Starts with subtle signs like frequent urination (especially at night), excessive thirst, sudden hunger pangs, slow wound healing, and persistent tiredness.",
     dosage: "Small frequent meals · pair carbs with fibre or protein",
     stamp: "LOW\nSUGAR",
     keywords: ["sugar"],
@@ -53,6 +118,7 @@ const CONDITIONS = [
     name: "High Blood Pressure",
     icon: "💢",
     sub: "Hypertension",
+    starts: "Often starts silently without strong signs, but early indicators include morning headaches, dizziness, blurred vision, and slight shortness of breath.",
     dosage: "Reduce sodium · add potassium-rich foods daily",
     stamp: "MONITOR\nBP",
     keywords: ["bp", "hypertension"],
@@ -77,6 +143,7 @@ const CONDITIONS = [
     name: "Obesity / Weight Gain",
     icon: "⚖️",
     sub: "Excess body weight management",
+    starts: "Begins with gradual waistline expansion, feeling easily winded when climbing stairs, frequent sluggishness, and increased joint pressure during walking.",
     dosage: "High fibre, portion-controlled meals · stay hydrated",
     stamp: "PORTION\nCONTROL",
     eat: [
@@ -100,6 +167,7 @@ const CONDITIONS = [
     name: "Anemia",
     icon: "🩹",
     sub: "Low haemoglobin / iron deficiency",
+    starts: "Starts with pale skin/under-eye color, unusual fatigue, cold hands and feet, dizziness upon standing, and brittle nails.",
     dosage: "Pair iron-rich foods with vitamin C to aid absorption",
     stamp: "BOOST\nIRON",
     eat: [
@@ -121,6 +189,7 @@ const CONDITIONS = [
     name: "Digestive Issues",
     icon: "🌀",
     sub: "Acidity, bloating, constipation",
+    starts: "Starts with mild heaviness after eating, abdominal gas buildup, occasional heartburn after spicy meals, and irregular bowel schedules.",
     dosage: "Eat slowly · include fibre and curd/yogurt daily",
     stamp: "GUT\nCARE",
     eat: [
@@ -143,6 +212,7 @@ const CONDITIONS = [
     name: "Thyroid (Hypothyroidism)",
     icon: "🦋",
     sub: "Underactive thyroid / slow metabolism",
+    starts: "Begins with unexplained weight gain despite regular eating, heightened sensitivity to cold, dry skin, muscle weakness, and puffy face.",
     dosage: "Take iodine-rich foods regularly · avoid raw goitrogens in excess",
     stamp: "THYRO\nCARE",
     eat: [
@@ -165,6 +235,7 @@ const CONDITIONS = [
     name: "Kidney Disease",
     icon: "🫘",
     sub: "Reduced kidney function",
+    starts: "Starts with swollen ankles or feet due to fluid retention, changes in urine frequency, foamy urine, and unexplained lower back discomfort.",
     dosage: "Limit salt & potassium/phosphorus as advised by your doctor",
     stamp: "LOW\nSODIUM",
     eat: [
@@ -187,6 +258,7 @@ const CONDITIONS = [
     name: "Liver Disease / Fatty Liver",
     icon: "🫀",
     sub: "Fatty liver, hepatitis, general liver support",
+    starts: "Begins with dull pain in the upper right abdomen, chronic fatigue, mild nausea after oily meals, and slight yellowing of eyes/skin.",
     dosage: "Avoid alcohol completely · keep meals light and fibre-rich",
     stamp: "LIVER\nCARE",
     eat: [
@@ -210,6 +282,7 @@ const CONDITIONS = [
     name: "Arthritis / Joint Pain",
     icon: "🦴",
     sub: "Joint inflammation & stiffness",
+    starts: "Starts with early morning joint stiffness lasting 30+ minutes, subtle swelling in fingers or knees, and cracking joint pain during cold weather.",
     dosage: "Include anti-inflammatory foods daily · stay at a healthy weight",
     stamp: "ANTI\nINFLAM",
     eat: [
@@ -232,6 +305,7 @@ const CONDITIONS = [
     name: "Skin Problems (Acne)",
     icon: "🌸",
     sub: "Acne, breakouts, dull skin",
+    starts: "Starts with excess facial oil secretion, clogged pores, small bumps around the T-zone, and redness following dairy or high-sugar intake.",
     dosage: "Drink water regularly · include antioxidant-rich foods",
     stamp: "SKIN\nGLOW",
     eat: [
@@ -254,6 +328,7 @@ const CONDITIONS = [
     name: "Hair Fall",
     icon: "💇",
     sub: "Hair thinning & fall",
+    starts: "Begins with increased strands left on hairbrushes or pillowcases, receding hairline/widening part line, itchy scalp, and weakened hair roots.",
     dosage: "Include protein and iron-rich foods for hair growth support",
     stamp: "HAIR\nCARE",
     eat: [
@@ -276,6 +351,7 @@ const CONDITIONS = [
     name: "Cold, Flu & Low Immunity",
     icon: "🤧",
     sub: "Frequent cold, cough, weak immunity",
+    starts: "Starts with a scratchy/dry throat sensation, mild body chills, sudden sneezing fits, runny nose, and low daily stamina.",
     dosage: "Take vitamin-C rich foods daily · keep warm and hydrated",
     stamp: "BOOST\nIMMUNE",
     eat: [
@@ -298,6 +374,7 @@ const CONDITIONS = [
     name: "Migraine / Headache",
     icon: "🤕",
     sub: "Frequent headaches & migraines",
+    starts: "Starts with warning signs like visual aura (flashing lights), throbbing pain on one side of the head, and extreme sensitivity to bright light or noise.",
     dosage: "Stay hydrated · eat meals on time to avoid trigger drops in sugar",
     stamp: "HEAD\nCARE",
     eat: [
@@ -320,6 +397,7 @@ const CONDITIONS = [
     name: "Insomnia / Sleep Issues",
     icon: "😴",
     sub: "Difficulty falling or staying asleep",
+    starts: "Begins with restless tossing in bed for 30+ minutes, waking up multiple times at night, racing thoughts at bedtime, and daytime drowsiness.",
     dosage: "Light dinner 2-3 hrs before bed · warm milk can help some people",
     stamp: "SLEEP\nWELL",
     eat: [
@@ -341,6 +419,7 @@ const CONDITIONS = [
     name: "PCOS / PCOD",
     icon: "🌙",
     sub: "Hormonal imbalance in women",
+    starts: "Starts with irregular or delayed periods, sudden facial hair growth, persistent acne along the jawline, and weight accumulation around the belly.",
     dosage: "Choose low-glycemic foods · maintain regular meal timing",
     stamp: "HORMONE\nBALANCE",
     eat: [
@@ -363,6 +442,7 @@ const CONDITIONS = [
     name: "Asthma",
     icon: "🫁",
     sub: "Breathing difficulty, wheezing",
+    starts: "Begins with dry coughing fits at night, chest tightness during cold weather or exertion, whistling/wheezing sound when breathing out.",
     dosage: "Include vitamin D and antioxidant-rich foods · avoid known triggers",
     stamp: "BREATHE\nEASY",
     eat: [
@@ -384,6 +464,7 @@ const CONDITIONS = [
     name: "Uric Acid / Gout",
     icon: "🦶",
     sub: "High uric acid, joint pain in toes/ankles",
+    starts: "Starts with sudden, intense throbbing pain in the big toe (often waking you up at night), extreme joint tenderness, redness, and heat around ankles or knees.",
     dosage: "Drink plenty of water · limit purine-rich foods",
     stamp: "LOW\nPURINE",
     eat: [
@@ -405,6 +486,7 @@ const CONDITIONS = [
     name: "Bone Weakness / Osteoporosis",
     icon: "🦴",
     sub: "Weak bones, low bone density",
+    starts: "Starts silently without early symptoms, but later manifests as gradual loss of height, stooped posture, frequent bone fractures from minor falls, and lower back ache.",
     dosage: "Take calcium with vitamin D · include some sunlight exposure",
     stamp: "BONE\nSTRONG",
     eat: [
@@ -426,6 +508,7 @@ const CONDITIONS = [
     name: "Stress & Mental Wellness",
     icon: "🧠",
     sub: "Stress, low mood, mental fatigue",
+    starts: "Begins with persistent muscle tension in shoulders/neck, difficulty concentrating, irritability over minor issues, changes in appetite, and brain fog.",
     dosage: "Eat regular balanced meals · avoid skipping breakfast",
     stamp: "MIND\nCALM",
     eat: [
@@ -448,6 +531,7 @@ const CONDITIONS = [
     name: "Fever",
     icon: "🌡️",
     sub: "Body temperature rise, viral fever, weakness",
+    starts: "Starts with sudden shivering and chills, body aches, skin feeling hot to touch, sudden spike in body temperature, loss of appetite, and sweating.",
     dosage: "Drink fluids frequently · eat light, easily digestible food",
     stamp: "STAY\nHYDRATED",
     keywords: ["temperature", "viral fever", "body heat"],
@@ -470,6 +554,7 @@ const CONDITIONS = [
     name: "Cough & Sore Throat",
     icon: "😷",
     sub: "Cough, throat pain, irritation",
+    starts: "Starts with tickling or roughness in the throat, painful swallowing, hoarse voice, and continuous dry or phlegm-producing coughing spells.",
     dosage: "Warm fluids help soothe the throat · gargle with warm salt water",
     stamp: "THROAT\nSOOTHE",
     keywords: ["cold", "throat pain", "sore throat"],
@@ -492,6 +577,7 @@ const CONDITIONS = [
     name: "Vomiting / Nausea",
     icon: "🤢",
     sub: "Nausea, upset stomach",
+    starts: "Begins with uncomfortable stomach churn, excess saliva production, dizziness, pale skin, and an overwhelming urge to throw up.",
     dosage: "Sip fluids slowly · start with bland food once nausea eases",
     stamp: "SETTLE\nSTOMACH",
     keywords: ["nausea", "vomit", "motion sickness"],
@@ -514,6 +600,7 @@ const CONDITIONS = [
     name: "Diarrhea / Loose Motion",
     icon: "🚻",
     sub: "Loose motions, stomach upset",
+    starts: "Starts with sudden abdominal cramping, gurgling gut sounds, watery stool urgent calls, and rapid loss of energy and hydration.",
     dosage: "Replace fluids constantly · follow bland BRAT-style diet",
     stamp: "REHYDRATE",
     keywords: ["loose motion", "stomach upset"],
@@ -536,6 +623,7 @@ const CONDITIONS = [
     name: "High Cholesterol",
     icon: "🧬",
     sub: "High LDL / triglycerides",
+    starts: "Has no direct early symptoms; typically detected during routine blood work. Advanced stages start with chest pain, yellowish skin bumps around eyes, and leg pain when walking.",
     dosage: "Increase soluble fibre · replace saturated fat with unsaturated fat",
     stamp: "LOW\nLDL",
     eat: [
@@ -557,6 +645,7 @@ const CONDITIONS = [
     name: "Piles / Constipation",
     icon: "🚽",
     sub: "Constipation, hemorrhoids",
+    starts: "Begins with hard stools requiring straining during bowel movements, feeling incomplete evacuation, mild itching or discomfort near the anal area, and occasional bright blood spots.",
     dosage: "High fibre + plenty of water helps ease bowel movement",
     stamp: "HIGH\nFIBRE",
     keywords: ["constipation", "hemorrhoids"],
@@ -579,6 +668,7 @@ const CONDITIONS = [
     name: "Gastric Ulcer / Acidity",
     icon: "🔥",
     sub: "Stomach acidity, ulcer pain",
+    starts: "Starts with burning stomach pain between meals or at night, acid reflux into the mouth, bloating, belching, and feeling uncomfortably full quickly.",
     dosage: "Eat small frequent meals · avoid lying down right after eating",
     stamp: "GENTLE\nDIET",
     keywords: ["acidity", "gastric", "heartburn"],
@@ -602,6 +692,7 @@ const CONDITIONS = [
     name: "Pregnancy Nutrition",
     icon: "🤰",
     sub: "General nutrition support during pregnancy",
+    starts: "Begins with missed period, morning sickness (nausea), heightened sensitivity to smells, tender breasts, and sudden mood shifts.",
     dosage: "Eat balanced, nutrient-dense meals · always follow your doctor's advice",
     stamp: "PRENATAL\nCARE",
     eat: [
@@ -624,6 +715,7 @@ const CONDITIONS = [
     name: "Eye / Vision Health",
     icon: "👁️",
     sub: "Weak eyesight, eye strain",
+    starts: "Begins with dry or watery eyes, frequent squinting to read far text, headaches after screen usage, blurred vision, and difficulty seeing at night.",
     dosage: "Include vitamin A and antioxidant-rich foods regularly",
     stamp: "VISION\nCARE",
     eat: [
@@ -638,12 +730,13 @@ const CONDITIONS = [
       { e: "🍬", t: "Excess sugar", w: "High sugar intake is linked to eye health issues over time." },
       { e: "🥤", t: "Sugary drinks", w: "Contributes to blood sugar issues that can affect vision long-term." },
     ],
-    },
+  },
   {
     id: "underweight",
     name: "Underweight / Weight Gain",
     icon: "📈",
     sub: "Low body weight, need healthy weight gain",
+    starts: "Starts with low appetite, rapid muscle loss, feeling exhausted easily, low cold tolerance, and frequent illnesses due to poor nutritional store.",
     dosage: "Eat calorie-dense, nutritious food frequently through the day",
     stamp: "HEALTHY\nGAIN",
     eat: [
@@ -665,6 +758,7 @@ const CONDITIONS = [
     name: "UTI (Urinary Tract Infection)",
     icon: "💦",
     sub: "Urinary tract infection, burning sensation",
+    starts: "Starts with a burning sensation while urinating, intense persistent urge to urinate frequently, cloudy or strong-smelling urine, and pelvic discomfort.",
     dosage: "Drink plenty of water · urinate frequently, don't hold it in",
     stamp: "FLUSH\nOUT",
     eat: [
@@ -685,6 +779,7 @@ const CONDITIONS = [
     name: "Sinusitis",
     icon: "👃",
     sub: "Sinus congestion, blocked nose",
+    starts: "Begins with facial pressure around eyes/forehead, stuffy or runny nose with thick discharge, loss of smell, and headache when bending forward.",
     dosage: "Warm fluids help clear congestion · steam inhalation also helps",
     stamp: "CLEAR\nSINUS",
     keywords: ["sinus", "congestion", "blocked nose"],
@@ -706,6 +801,7 @@ const CONDITIONS = [
     name: "Vitamin D Deficiency",
     icon: "☀️",
     sub: "Low vitamin D, bone/muscle weakness",
+    starts: "Starts with subtle symptoms like frequent infections, dull bone pain, muscle aches, unexplained low mood, and slow recovery after workouts.",
     dosage: "Get sunlight exposure daily · include fortified/vitamin-D foods",
     stamp: "VIT-D\nBOOST",
     eat: [
@@ -725,6 +821,7 @@ const CONDITIONS = [
     name: "Vitamin B12 Deficiency",
     icon: "🩸",
     sub: "Low B12, fatigue, weakness (common in vegetarians)",
+    starts: "Begins with tingling sensation or 'pins & needles' in hands or feet, tongue soreness, constant weakness, memory fog, and mood changes.",
     dosage: "Include B12 sources daily · vegetarians may need supplements (ask doctor)",
     stamp: "B12\nBOOST",
     eat: [
@@ -744,6 +841,7 @@ const CONDITIONS = [
     name: "Menstrual Issues / PMS",
     icon: "🩷",
     sub: "Period cramps, PMS, irregular cycles",
+    starts: "Starts 1-2 weeks before period with abdominal cramping, breast tenderness, bloating, severe mood swings, acne flare-ups, and food cravings.",
     dosage: "Include iron & magnesium-rich food · stay hydrated during cycle",
     stamp: "CYCLE\nCARE",
     keywords: ["periods", "pms", "cramps"],
@@ -763,20 +861,43 @@ const CONDITIONS = [
   },
 ];
 
+// ===== DOM ELEMENTS =====
 const select = document.getElementById("conditionSelect");
 const chips = document.getElementById("conditionChips");
 const rxArea = document.getElementById("rxArea");
+
 const pageHome = document.getElementById("pageHome");
 const pageSolution = document.getElementById("pageSolution");
-const backHomeBtn = document.getElementById("backHomeBtn");
+const pageSearch = document.getElementById("pageSearch");
+const pageFoodWhy = document.getElementById("pageFoodWhy");
 
-backHomeBtn.addEventListener("click", () => {
+const backHomeFromRx = document.getElementById("backHomeFromRx");
+const backHomeFromSearch = document.getElementById("backHomeFromSearch");
+const backHomeFromFoodWhy = document.getElementById("backHomeFromFoodWhy");
+
+const searchBySymptomCard = document.getElementById("searchBySymptomCard");
+const tapToLearnWhyCard = document.getElementById("tapToLearnWhyCard");
+
+const searchResultGrid = document.getElementById("searchResultGrid");
+const foodWhyGrid = document.getElementById("foodWhyGrid");
+
+const pageSearchInput = document.getElementById("pageSearchInput");
+const searchResultsCount = document.getElementById("searchResultsCount");
+
+// Navigation function to return home
+function goToHome() {
   pageSolution.classList.add("hidden");
+  pageSearch.classList.add("hidden");
+  pageFoodWhy.classList.add("hidden");
   pageHome.classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
-});
+}
 
-// populate dropdown
+backHomeFromRx.addEventListener("click", goToHome);
+backHomeFromSearch.addEventListener("click", goToHome);
+backHomeFromFoodWhy.addEventListener("click", goToHome);
+
+// Populate dropdown options
 const VISIBLE_CHIP_COUNT = 10;
 let chipsExpanded = false;
 
@@ -826,7 +947,110 @@ renderChips();
 
 select.addEventListener("change", (e) => selectCondition(e.target.value));
 
-// ===== SEARCH BOX: type a symptom, get the matching condition =====
+// Render cards helper
+function createConditionCard(c) {
+  const card = document.createElement("div");
+  card.className = "directory-card";
+  card.innerHTML = `
+    <div class="directory-card__head">
+      <span class="directory-card__icon">${c.icon}</span>
+      <h4 class="directory-card__title">${c.name}</h4>
+    </div>
+    <p class="directory-card__sub">${c.sub}</p>
+    <p class="directory-card__starts"><strong>⚡ How it Starts:</strong> ${c.starts}</p>
+    <p class="directory-card__desc"><strong>💊 Guidance:</strong> ${c.dosage}</p>
+  `;
+  card.addEventListener("click", () => selectCondition(c.id));
+  return card;
+}
+
+// Click "Search by Symptom" card to switch to Page 3 (Search Page)
+searchBySymptomCard.addEventListener("click", () => {
+  pageHome.classList.add("hidden");
+  pageSolution.classList.add("hidden");
+  pageFoodWhy.classList.add("hidden");
+  pageSearch.classList.remove("hidden");
+  renderSearchResults("");
+  pageSearchInput.value = "";
+  pageSearchInput.focus();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Click "Tap to Learn Why" card to switch to Page 4 (Food Insights Page)
+tapToLearnWhyCard.addEventListener("click", () => {
+  pageHome.classList.add("hidden");
+  pageSolution.classList.add("hidden");
+  pageSearch.classList.add("hidden");
+  pageFoodWhy.classList.remove("hidden");
+  renderFoodWhyGrid();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Render Food Insights Grid
+function renderFoodWhyGrid() {
+  foodWhyGrid.innerHTML = "";
+  FOOD_INSIGHTS.forEach((item) => {
+    const card = document.createElement("div");
+    const cardTypeClass = item.type === "good" ? "food-why-card--good" : "food-why-card--bad";
+    card.className = `food-why-card ${cardTypeClass}`;
+
+    const pointsHTML = item.points
+      .map((p) => {
+        const markClass = p.mark === "✓" ? "food-why-card__mark--good" : "food-why-card__mark--bad";
+        return `
+          <li class="food-why-card__item">
+            <span class="${markClass}">${p.mark}</span>
+            <span>${p.text}</span>
+          </li>
+        `;
+      })
+      .join("");
+
+    card.innerHTML = `
+      <div class="food-why-card__head">
+        <span class="food-why-card__emoji">${item.emoji}</span>
+        <h4 class="food-why-card__name">${item.name}</h4>
+      </div>
+      <ul class="food-why-card__list">
+        ${pointsHTML}
+      </ul>
+    `;
+    foodWhyGrid.appendChild(card);
+  });
+}
+
+// Render Dynamic Symptom Search Results
+function renderSearchResults(query) {
+  searchResultGrid.innerHTML = "";
+  const q = query.trim().toLowerCase();
+
+  const filtered = CONDITIONS.filter((c) => {
+    if (!q) return true;
+    const nameMatch = c.name.toLowerCase().includes(q);
+    const subMatch = c.sub.toLowerCase().includes(q);
+    const startsMatch = c.starts.toLowerCase().includes(q);
+    const keywordMatch = (c.keywords || []).some((k) => k.toLowerCase().includes(q));
+    return nameMatch || subMatch || startsMatch || keywordMatch;
+  });
+
+  searchResultsCount.textContent = q
+    ? `Found ${filtered.length} matching health condition(s) for "${query}"`
+    : `Showing all ${filtered.length} health conditions`;
+
+  if (filtered.length === 0) {
+    searchResultGrid.innerHTML = `<p style="grid-column: 1 / -1; color: var(--rose);">No health conditions found matching "${query}". Try searching for terms like "fever", "cramps", "fatigue", "pain", or "headache".</p>`;
+  } else {
+    filtered.forEach((c) => {
+      searchResultGrid.appendChild(createConditionCard(c));
+    });
+  }
+}
+
+pageSearchInput.addEventListener("input", (e) => {
+  renderSearchResults(e.target.value);
+});
+
+// Search bar on Home page
 const searchInput = document.getElementById("symptomSearch");
 const searchBtn = document.getElementById("searchBtn");
 const searchHint = document.getElementById("searchHint");
@@ -841,7 +1065,8 @@ function findConditionByText(query) {
   if (match) return match;
 
   match = CONDITIONS.find((c) =>
-    (c.keywords || []).some((k) => k.toLowerCase().includes(q) || q.includes(k.toLowerCase()))
+    (c.keywords || []).some((k) => k.toLowerCase().includes(q)) ||
+    c.starts.toLowerCase().includes(q)
   );
   return match || null;
 }
@@ -883,13 +1108,13 @@ function selectCondition(id) {
 
   renderSlip(cond);
 
-  // switch from Home page to Solution page
   pageHome.classList.add("hidden");
+  pageSearch.classList.add("hidden");
+  pageFoodWhy.classList.add("hidden");
   pageSolution.classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// build one clickable food item (click to expand/collapse its "why" description)
 function foodItemHTML(item, type) {
   const mark = type === "eat" ? "✓" : "✕";
   const why = item.w ? item.w : "No additional details available.";
@@ -923,6 +1148,11 @@ function renderSlip(cond) {
         <div class="rx-slip__stamp">${cond.stamp}</div>
       </div>
 
+      <div class="rx-slip__starts-box">
+        <strong>⚡ How this health problem starts:</strong>
+        <p>${cond.starts}</p>
+      </div>
+
       <p class="rx-slip__tip">💡 Tap any food item below to see why it helps or hurts.</p>
 
       <div class="rx-slip__body">
@@ -943,7 +1173,6 @@ function renderSlip(cond) {
     </div>
   `;
 
-  // attach click/keyboard toggle behaviour to each food item
   rxArea.querySelectorAll(".food-item").forEach((li) => {
     const toggle = () => {
       const isOpen = li.classList.toggle("open");
@@ -958,3 +1187,52 @@ function renderSlip(cond) {
     });
   });
 }
+
+// ===== AUTHENTICATION FLOW HANDLERS =====
+const authModal = document.getElementById("authModal");
+const appContent = document.getElementById("appContent");
+const authStep1 = document.getElementById("authStep1");
+const authStep2 = document.getElementById("authStep2");
+const authSuccess = document.getElementById("authSuccess");
+const backToStep1 = document.getElementById("backToStep1");
+const welcomeUserMsg = document.getElementById("welcomeUserMsg");
+
+let userDetails = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: ""
+};
+
+authStep1.addEventListener("submit", (e) => {
+  e.preventDefault();
+  userDetails.firstName = document.getElementById("firstName").value.trim();
+  userDetails.lastName = document.getElementById("lastName").value.trim();
+
+  if (userDetails.firstName && userDetails.lastName) {
+    authStep1.classList.add("hidden");
+    authStep2.classList.remove("hidden");
+  }
+});
+
+backToStep1.addEventListener("click", () => {
+  authStep2.classList.add("hidden");
+  authStep1.classList.remove("hidden");
+});
+
+authStep2.addEventListener("submit", (e) => {
+  e.preventDefault();
+  userDetails.email = document.getElementById("emailInput").value.trim();
+  userDetails.phone = document.getElementById("phoneInput").value.trim();
+
+  if (userDetails.email && userDetails.phone) {
+    authStep2.classList.add("hidden");
+    authSuccess.classList.remove("hidden");
+    welcomeUserMsg.textContent = `Welcome, ${userDetails.firstName} ${userDetails.lastName}!`;
+
+    setTimeout(() => {
+      authModal.classList.add("hidden");
+      appContent.classList.remove("hidden");
+    }, 1500);
+  }
+});

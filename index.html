@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nutrix — Food Prescriptions for Health Conditions</title>
-<link rel="stylesheet" href="d1.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ===== AUTH / LOGIN MODAL FLOW ===== -->
   <div class="auth-overlay" id="authModal">
     <div class="auth-card">
       <div class="auth-card__header">
@@ -17,7 +16,6 @@
         <p>Your personalized food prescription guide</p>
       </div>
 
-      <!-- Step 1: Name Input -->
       <form id="authStep1" class="auth-form">
         <div class="form-group">
           <label for="firstName">First Name</label>
@@ -30,7 +28,6 @@
         <button type="submit" class="auth-btn">Next Step →</button>
       </form>
 
-      <!-- Step 2: Contact Details Input -->
       <form id="authStep2" class="auth-form hidden">
         <div class="form-group">
           <label for="emailInput">Email Address</label>
@@ -46,7 +43,6 @@
         </div>
       </form>
 
-      <!-- Step 3: Success Screen -->
       <div id="authSuccess" class="auth-success hidden">
         <div class="auth-success__icon">✓</div>
         <h3>Login Successful!</h3>
@@ -54,11 +50,9 @@
       </div>
     </div>
   </div>
-
-  <!-- ===== MAIN APPLICATION CONTENT ===== -->
+ 
   <div id="appContent" class="app-content hidden">
-
-    <!-- ===== HEADER : Pharmacy signboard ===== -->
+   
     <header class="signboard">
       <div class="signboard__inner">
         <div class="signboard__mark" aria-hidden="true">
@@ -80,7 +74,6 @@
       </div>
     </header>
 
-    <!-- ===== PAGE 1: HOME - symptom selector ===== -->
     <section class="intake" id="pageHome">
       <div class="intake__card">
         <p class="intake__label">Type your problem —</p>
@@ -115,7 +108,6 @@
           <p class="feature-card__text">Type what you're feeling and get instant matches for all diseases.</p>
         </div>
         
-        <!-- Clickable card to redirect to the Food Insights Page -->
         <div class="feature-card feature-card--clickable" id="tapToLearnWhyCard">
           <span class="feature-card__icon">👆</span>
           <p class="feature-card__title">Tap to Learn Why <span class="feature-card__badge">Open Page →</span></p>
@@ -124,7 +116,6 @@
       </div>
     </section>
 
-    <!-- ===== PAGE 2: SOLUTION - prescription slip ===== -->
     <section class="page-subpage hidden" id="pageSolution">
       <div class="subpage__wrap">
         <div class="page-nav-row">
@@ -134,7 +125,6 @@
       </div>
     </section>
 
-    <!-- ===== PAGE 3: SYMPTOM SEARCH DEDICATED PAGE ===== -->
     <section class="page-subpage hidden" id="pageSearch">
       <div class="subpage__wrap">
         <div class="page-nav-row">
@@ -160,7 +150,6 @@
       </div>
     </section>
 
-    <!-- ===== PAGE 4: FOOD INSIGHTS ("Tap to Learn Why") ===== -->
     <section class="page-subpage hidden" id="pageFoodWhy">
       <div class="subpage__wrap">
         <div class="page-nav-row">
@@ -174,7 +163,6 @@
       </div>
     </section>
 
-    <!-- ===== ABOUT / DISCLAIMER STRIP ===== -->
     <footer class="disclaimer">
       <div class="disclaimer__inner">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -187,6 +175,6 @@
 
   </div>
 
-<script src="d2.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

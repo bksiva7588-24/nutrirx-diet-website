@@ -25,7 +25,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ============ SIGNBOARD HEADER ============ */
 .signboard {
   background: var(--green-dark);
   background-image: radial-gradient(circle at 92% 10%, rgba(200,150,30,0.16), transparent 45%);
@@ -142,7 +141,6 @@ body {
   line-height: 1.4;
 }
 
-/* ============ PAGE TOGGLES & SUBPAGES ============ */
 .hidden { display: none !important; }
 
 .page-subpage {
@@ -187,7 +185,6 @@ body {
 
 .back-btn:hover { background: var(--green-dark); color: #fff; }
 
-/* ============ DEDICATED SYMPTOM SEARCH PAGE ============ */
 .search-page__box {
   margin-bottom: 1.2rem;
 }
@@ -205,7 +202,6 @@ body {
   margin-bottom: 1.2rem;
 }
 
-/* ============ FOOD INSIGHTS ("TAP TO LEARN WHY") PAGE ============ */
 .food-why-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -278,7 +274,6 @@ body {
   font-weight: bold;
 }
 
-/* ============ DIRECTORY GRID ============ */
 .directory-header {
   border-bottom: 2px dashed var(--line);
   padding-bottom: 0.8rem;
@@ -365,7 +360,6 @@ body {
   line-height: 1.35;
 }
 
-/* ============ INTAKE FORM ============ */
 .intake { padding: 2rem 1.5rem 0; }
 .intake__card {
   max-width: 900px;
@@ -467,7 +461,6 @@ body {
 }
 .chip--more:hover { background: var(--gold); color: #fff; }
 
-/* ============ RX PRESCRIPTION SLIP ============ */
 .rx-area {
   max-width: 900px;
   margin: 1rem auto 3rem;
@@ -648,7 +641,6 @@ body {
 }
 .rx-slip__foot strong { color: var(--gold); }
 
-/* ============ FOOTER DISCLAIMER ============ */
 .disclaimer {
   background: var(--paper-2);
   border-top: 1px solid var(--line);
@@ -678,7 +670,6 @@ select:focus-visible, .chip:focus-visible {
   outline-offset: 2px;
 }
 
-/* ============ AUTH / LOGIN MODAL ============ */
 .auth-overlay {
   position: fixed;
   inset: 0;

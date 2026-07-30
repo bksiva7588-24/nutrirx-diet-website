@@ -1,4 +1,3 @@
-// ===== DATA: FOOD INSIGHTS ("TAP TO LEARN WHY") =====
 const FOOD_INSIGHTS = [
   {
     emoji: "🥗",
@@ -62,7 +61,6 @@ const FOOD_INSIGHTS = [
   }
 ];
 
-// ===== DATA: HEALTH CONDITIONS =====
 const CONDITIONS = [
   {
     id: "heart",
@@ -861,7 +859,6 @@ const CONDITIONS = [
   },
 ];
 
-// ===== DOM ELEMENTS =====
 const select = document.getElementById("conditionSelect");
 const chips = document.getElementById("conditionChips");
 const rxArea = document.getElementById("rxArea");
@@ -884,7 +881,6 @@ const foodWhyGrid = document.getElementById("foodWhyGrid");
 const pageSearchInput = document.getElementById("pageSearchInput");
 const searchResultsCount = document.getElementById("searchResultsCount");
 
-// Navigation function to return home
 function goToHome() {
   pageSolution.classList.add("hidden");
   pageSearch.classList.add("hidden");
@@ -897,7 +893,6 @@ backHomeFromRx.addEventListener("click", goToHome);
 backHomeFromSearch.addEventListener("click", goToHome);
 backHomeFromFoodWhy.addEventListener("click", goToHome);
 
-// Populate dropdown options
 const VISIBLE_CHIP_COUNT = 10;
 let chipsExpanded = false;
 
@@ -947,7 +942,6 @@ renderChips();
 
 select.addEventListener("change", (e) => selectCondition(e.target.value));
 
-// Render cards helper
 function createConditionCard(c) {
   const card = document.createElement("div");
   card.className = "directory-card";
@@ -964,7 +958,6 @@ function createConditionCard(c) {
   return card;
 }
 
-// Click "Search by Symptom" card to switch to Page 3 (Search Page)
 searchBySymptomCard.addEventListener("click", () => {
   pageHome.classList.add("hidden");
   pageSolution.classList.add("hidden");
@@ -976,7 +969,6 @@ searchBySymptomCard.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Click "Tap to Learn Why" card to switch to Page 4 (Food Insights Page)
 tapToLearnWhyCard.addEventListener("click", () => {
   pageHome.classList.add("hidden");
   pageSolution.classList.add("hidden");
@@ -986,7 +978,6 @@ tapToLearnWhyCard.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Render Food Insights Grid
 function renderFoodWhyGrid() {
   foodWhyGrid.innerHTML = "";
   FOOD_INSIGHTS.forEach((item) => {
@@ -1019,7 +1010,6 @@ function renderFoodWhyGrid() {
   });
 }
 
-// Render Dynamic Symptom Search Results
 function renderSearchResults(query) {
   searchResultGrid.innerHTML = "";
   const q = query.trim().toLowerCase();
@@ -1050,7 +1040,6 @@ pageSearchInput.addEventListener("input", (e) => {
   renderSearchResults(e.target.value);
 });
 
-// Search bar on Home page
 const searchInput = document.getElementById("symptomSearch");
 const searchBtn = document.getElementById("searchBtn");
 const searchHint = document.getElementById("searchHint");
@@ -1188,7 +1177,6 @@ function renderSlip(cond) {
   });
 }
 
-// ===== AUTHENTICATION FLOW HANDLERS =====
 const authModal = document.getElementById("authModal");
 const appContent = document.getElementById("appContent");
 const authStep1 = document.getElementById("authStep1");
